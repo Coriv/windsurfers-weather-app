@@ -17,7 +17,7 @@ public class WeatherForCity {
     @JsonProperty("country_code")
     private String countryCode;
     @JsonProperty("data")
-    private List<WeatherData> weatherDetails;
+    private List<DailyWeatherData> dailyWeatherDataList;
     @JsonProperty("lat")
     private String latitude;
     @JsonProperty("lon")
