@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DailyWeatherData {
+public class DailyDetails {
     @JsonProperty("app_max_temp")
     private double apparentMaxTemp;
     @JsonProperty("app_min_temp")
