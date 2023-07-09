@@ -10,14 +10,14 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherForCity {
+public class WeatherData {
 
     @JsonProperty("city_name")
     private String cityName;
     @JsonProperty("country_code")
     private String countryCode;
     @JsonProperty("data")
-    private List<DailyWeatherData> dailyWeatherDataList;
+    private List<DailyDetails> dailyDetailsList;
     @JsonProperty("lat")
     private String latitude;
     @JsonProperty("lon")

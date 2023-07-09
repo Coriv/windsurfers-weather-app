@@ -1,7 +1,7 @@
 package com.project.weatherforwindsurfersapp.service;
 
 import com.project.weatherforwindsurfersapp.config.AdminConfig;
-import com.project.weatherforwindsurfersapp.dto.WeatherForCity;
+import com.project.weatherforwindsurfersapp.dto.WeatherData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,19 +12,19 @@ import java.nio.charset.StandardCharsets;
 
 @Service
 @RequiredArgsConstructor
-public class WeatherService {
+public class ExternalDataService {
 
     private final RestTemplate restTemplate;
-    private final AdminConfig adminConfig;
+    private final AdminConfig config;
 
-    public WeatherForCity fetchWeatherDataByCity(String cityName) {
-        return restTemplate.getForObject(prepareUri(cityName), WeatherForCity.class);
+    public WeatherData fetchWeatherDataByCity(String cityName) {
+        return restTemplate.getForObject(prepareUri(cityName), WeatherData.class);
     }
 
     private URI prepareUri(String cityName) {
-        return UriComponentsBuilder.fromHttpUrl(adminConfig.getURL())
+        return UriComponentsBuilder.fromHttpUrl(config.getURL())
                 .queryParam("city", cityName)
-                .queryParam("key", adminConfig.getAPI_KEY())
+                .queryParam("key", config.getAPI_KEY())
                 .encode(StandardCharsets.UTF_8)
                 .build()
                 .toUri();
