@@ -1,13 +1,9 @@
 package com.project.weatherforwindsurfersapp.config;
 
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
-
-@Getter
 @Component
 public class AdminConfig {
 
@@ -17,4 +13,22 @@ public class AdminConfig {
     private String URL;
     @Value("${weather.location.cities}")
     private List<String> cities;
+    @Value("${weatherbit.io.max.limit.dates}")
+    private long maxLimitForRequestedDates;
+
+    public String API_KEY() {
+        return API_KEY;
+    }
+
+    public String URL() {
+        return URL;
+    }
+
+    public List<String> cities() {
+        return cities;
+    }
+
+    public long maxLimitForFreeLicence() {
+        return maxLimitForRequestedDates;
+    }
 }

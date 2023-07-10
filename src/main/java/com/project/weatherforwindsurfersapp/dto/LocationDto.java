@@ -12,5 +12,7 @@ public class LocationDto {
     private double totalScore;
     private double averageTemp;
     private double windSpeed;
+    private double latitude;
+    private double longitude;
     private LocalDate date;
 }
