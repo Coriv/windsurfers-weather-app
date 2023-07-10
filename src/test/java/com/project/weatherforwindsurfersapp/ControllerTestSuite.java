@@ -2,6 +2,7 @@ package com.project.weatherforwindsurfersapp;
 
 import com.project.weatherforwindsurfersapp.controller.LocationController;
 import com.project.weatherforwindsurfersapp.dto.LocationDto;
+import com.project.weatherforwindsurfersapp.service.ValidateDateRangeService;
 import com.project.weatherforwindsurfersapp.service.WeatherDataService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,13 @@ public class ControllerTestSuite {
     private MockMvc mockMvc;
     @MockBean
     private WeatherDataService weatherDataService;
+    @MockBean
+    private ValidateDateRangeService validateDateRangeService;
 
     @Test
     void shouldFetchLocationDtoTest() throws Exception {
         //given
+        LocalDate today = LocalDate.now();
         LocationDto location = LocationDto.builder()
                 .citiName("Amsterdam")
                 .totalScore(55.0)
@@ -42,7 +46,7 @@ public class ControllerTestSuite {
         when(weatherDataService.findBestLocationForGivenDate(any(LocalDate.class))).thenReturn(location);
         //when & then
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/api/v1/best-location/2023-07-10")
+                        .get("/api/v1/best-location/" + today)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.citiName", is("Amsterdam")))
@@ -55,12 +59,13 @@ public class ControllerTestSuite {
     }
 
     @Test
-    void shouldReturnEmptyBodyTest() throws Exception {
+    void shouldFetchEmptyBodyTest() throws Exception {
         //given
+        LocalDate today = LocalDate.now();
         when(weatherDataService.findBestLocationForGivenDate(any(LocalDate.class))).thenReturn(null);
         //when & then
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/api/v1/best-location/2023-07-10")
+                        .get("/api/v1/best-location/" + today)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(""));
