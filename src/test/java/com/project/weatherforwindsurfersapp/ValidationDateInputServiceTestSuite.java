@@ -27,7 +27,7 @@ public class ValidationDateInputServiceTestSuite {
     void checkIsDateInTheReachableRangeTest() throws AvailableRangeExceededException {
         //given
         LocalDate today = LocalDate.now();
-        when(adminConfig.maxLimitForFreeLicence()).thenReturn(7l);
+        when(adminConfig.getMaxLimitForFreeLicence()).thenReturn(7l);
         //when & then
         assertDoesNotThrow(() -> validateDateRangeService.checkIfDateIsInReachableRange(today));
         assertDoesNotThrow(() -> validateDateRangeService.checkIfDateIsInReachableRange(today.plusDays(7)));

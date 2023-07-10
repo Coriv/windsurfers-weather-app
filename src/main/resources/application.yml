@@ -1,3 +1,8 @@
+spring:
+  application:
+    name: Worldwide windsurfer's weather app
+
+# External API data
 weatherbit:
   io:
    api:
@@ -7,9 +12,8 @@ weatherbit:
      limit:
        dates: 7
 
-
-
+# Embedded list of locations
 weather:
-  location:
-    cities:
-      Jastarnia, Bridgetown, Fortaleza, Pissouri, La Morne
+  locations:
+    Jastarnia, Bridgetown, Fortaleza, Pissouri, La Morne
+

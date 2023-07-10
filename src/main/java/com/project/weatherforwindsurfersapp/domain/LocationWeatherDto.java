@@ -1,4 +1,4 @@
-package com.project.weatherforwindsurfersapp.dto;
+package com.project.weatherforwindsurfersapp.domain;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 @Builder
-public class LocationDto {
+public class LocationWeatherDto {
     private String citiName;
     private double totalScore;
     private double averageTemp;

@@ -21,7 +21,7 @@ public class ValidateDateRangeService {
 
     private boolean validDate(LocalDate date) {
         var today = LocalDate.now();
-        var limit = config.maxLimitForFreeLicence();
+        var limit = config.getMaxLimitForFreeLicence();
         boolean isToday = date.isEqual(today);
         boolean isAfterToday = date.isAfter(today);
         boolean isBeforeTheReachableExtent = date.isBefore(today.plusDays(limit + 1));

@@ -1,10 +1,10 @@
 package com.project.weatherforwindsurfersapp.service;
 
 import com.project.weatherforwindsurfersapp.config.AdminConfig;
-import com.project.weatherforwindsurfersapp.dto.DailyDetails;
-import com.project.weatherforwindsurfersapp.dto.LocationDto;
-import com.project.weatherforwindsurfersapp.dto.WeatherData;
+import com.project.weatherforwindsurfersapp.domain.LocationWeatherDto;
 import com.project.weatherforwindsurfersapp.exception.DailyDetailsDoesNotExistException;
+import com.project.weatherforwindsurfersapp.externalDto.DailyDetails;
+import com.project.weatherforwindsurfersapp.externalDto.WeatherData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,28 +16,26 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class WeatherDataService {
-
-    private final AdminConfig config;
     private final ExternalDataService externalDataService;
-
-    public LocationDto findBestLocationForGivenDate(LocalDate date) {
+    private final AdminConfig adminConfig;
+    public LocationWeatherDto findBestLocationForGivenDate(LocalDate date) {
         return prepareWeatherDataForCities().stream()
                 .map((weather) -> prepareSearchedLocationDtos(weather, date))
                 .filter(city -> areTheConditionsInRange(city.getWindSpeed(), city.getAverageTemp()))
-                .max(Comparator.comparingDouble(LocationDto::getTotalScore))
+                .max(Comparator.comparingDouble(LocationWeatherDto::getTotalScore))
                 .orElse(null);
     }
 
     private List<WeatherData> prepareWeatherDataForCities() {
-        return config.cities().stream()
+        return adminConfig.getLocations().stream()
                 .map(externalDataService::fetchWeatherDataByCity)
                 .collect(Collectors.toList());
     }
 
-    private LocationDto prepareSearchedLocationDtos(WeatherData weatherData, LocalDate date) {
+    private LocationWeatherDto prepareSearchedLocationDtos(WeatherData weatherData, LocalDate date) {
         var weatherDetails = fetchDailyDetailsOnGivenDate(weatherData, date);
         var score = calculateWeatherScore(weatherDetails);
-        return LocationDto.builder()
+        return LocationWeatherDto.builder()
                 .citiName(weatherData.getCityName())
                 .totalScore(score)
                 .averageTemp(weatherDetails.getAverageTemp())

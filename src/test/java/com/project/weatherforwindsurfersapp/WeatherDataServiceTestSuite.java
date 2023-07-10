@@ -1,8 +1,8 @@
 package com.project.weatherforwindsurfersapp;
 
 import com.project.weatherforwindsurfersapp.config.AdminConfig;
-import com.project.weatherforwindsurfersapp.dto.DailyDetails;
-import com.project.weatherforwindsurfersapp.dto.WeatherData;
+import com.project.weatherforwindsurfersapp.externalDto.DailyDetails;
+import com.project.weatherforwindsurfersapp.externalDto.WeatherData;
 import com.project.weatherforwindsurfersapp.exception.DailyDetailsDoesNotExistException;
 import com.project.weatherforwindsurfersapp.service.ExternalDataService;
 import com.project.weatherforwindsurfersapp.service.WeatherDataService;
@@ -118,7 +118,7 @@ public class WeatherDataServiceTestSuite {
         var day2 = LocalDate.now().plusDays(1);
         var day3 = LocalDate.now().plusDays(2);
         //mocking
-        when(config.cities()).thenReturn(cities);
+        when(config.getLocations()).thenReturn(cities);
         when(externalDataService.fetchWeatherDataByCity("Krakow")).thenReturn(krakowData);
         when(externalDataService.fetchWeatherDataByCity("Warsaw")).thenReturn(warsawData);
         when(externalDataService.fetchWeatherDataByCity("Poznan")).thenReturn(poznanData);
@@ -136,7 +136,7 @@ public class WeatherDataServiceTestSuite {
         assertEquals("Warsaw", resultDay3.getCitiName());
         assertEquals(14.0, resultDay3.getAverageTemp());
         assertEquals(15.5, resultDay3.getWindSpeed());
-        verify(config, times(3)).cities();
+        verify(config, times(3)).getLocations();
         verify(externalDataService, times(9)).fetchWeatherDataByCity(anyString());
     }
 
@@ -147,7 +147,7 @@ public class WeatherDataServiceTestSuite {
         var day2 = LocalDate.now().plusDays(1);
         var day3 = LocalDate.now().plusDays(2);
         //mocking
-        when(config.cities()).thenReturn(cities);
+        when(config.getLocations()).thenReturn(cities);
         when(externalDataService.fetchWeatherDataByCity("Krakow")).thenReturn(krakowData);
         when(externalDataService.fetchWeatherDataByCity("Warsaw")).thenReturn(warsawData);
         when(externalDataService.fetchWeatherDataByCity("Poznan")).thenReturn(poznanData);
@@ -159,7 +159,7 @@ public class WeatherDataServiceTestSuite {
         assertEquals(82.5, resultDay1.getTotalScore());
         assertEquals(70.6, resultDay2.getTotalScore());
         assertEquals(60.5, resultDay3.getTotalScore());
-        verify(config, times(3)).cities();
+        verify(config, times(3)).getLocations();
         verify(externalDataService, times(3)).fetchWeatherDataByCity("Warsaw");
     }
 
@@ -169,7 +169,7 @@ public class WeatherDataServiceTestSuite {
         var earlierDate = LocalDate.now().minusDays(10);
         var laterDate = LocalDate.now().plusDays(22);
         //mocking
-        when(config.cities()).thenReturn(cities);
+        when(config.getLocations()).thenReturn(cities);
         when(externalDataService.fetchWeatherDataByCity("Krakow")).thenReturn(krakowData);
         when(externalDataService.fetchWeatherDataByCity("Warsaw")).thenReturn(warsawData);
         when(externalDataService.fetchWeatherDataByCity("Poznan")).thenReturn(poznanData);
@@ -188,7 +188,7 @@ public class WeatherDataServiceTestSuite {
         warsawData.getDailyDetailsList().get(0).setAverageTemp(35.01);
         poznanData.getDailyDetailsList().get(0).setAverageTemp(-14.5);
         //mocking
-        when(config.cities()).thenReturn(cities);
+        when(config.getLocations()).thenReturn(cities);
         when(externalDataService.fetchWeatherDataByCity("Krakow")).thenReturn(krakowData);
         when(externalDataService.fetchWeatherDataByCity("Warsaw")).thenReturn(warsawData);
         when(externalDataService.fetchWeatherDataByCity("Poznan")).thenReturn(poznanData);
@@ -196,7 +196,7 @@ public class WeatherDataServiceTestSuite {
         var location = weatherService.findBestLocationForGivenDate(day1);
         //then;
         assertNull(location);
-        verify(config, times(1)).cities();
+        verify(config, times(1)).getLocations();
         verify(externalDataService, times(3)).fetchWeatherDataByCity(anyString());
     }
 
@@ -208,7 +208,7 @@ public class WeatherDataServiceTestSuite {
         warsawData.getDailyDetailsList().get(0).setWindSpeed(18.01);
         poznanData.getDailyDetailsList().get(0).setWindSpeed(-14.5);
         //mocking
-        when(config.cities()).thenReturn(cities);
+        when(config.getLocations()).thenReturn(cities);
         when(externalDataService.fetchWeatherDataByCity("Krakow")).thenReturn(krakowData);
         when(externalDataService.fetchWeatherDataByCity("Warsaw")).thenReturn(warsawData);
         when(externalDataService.fetchWeatherDataByCity("Poznan")).thenReturn(poznanData);
@@ -216,7 +216,7 @@ public class WeatherDataServiceTestSuite {
         var location = weatherService.findBestLocationForGivenDate(day1);
         //then
         assertNull(location);
-        verify(config, times(1)).cities();
+        verify(config, times(1)).getLocations();
         verify(externalDataService, times(3)).fetchWeatherDataByCity(anyString());
     }
 }

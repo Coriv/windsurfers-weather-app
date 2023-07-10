@@ -1,4 +1,4 @@
-package com.project.weatherforwindsurfersapp.dto;
+package com.project.weatherforwindsurfersapp.externalDto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

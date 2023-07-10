@@ -11,8 +11,8 @@ public class AdminConfig {
     private String API_KEY;
     @Value("${weatherbit.io.api.url}")
     private String URL;
-    @Value("${weather.location.cities}")
-    private List<String> cities;
+    @Value("${weather.locations}")
+    private List<String> locations;
     @Value("${weatherbit.io.max.limit.dates}")
     private long maxLimitForRequestedDates;
 
@@ -24,11 +24,11 @@ public class AdminConfig {
         return URL;
     }
 
-    public List<String> cities() {
-        return cities;
+    public List<String> getLocations() {
+        return locations;
     }
 
-    public long maxLimitForFreeLicence() {
+    public long getMaxLimitForFreeLicence() {
         return maxLimitForRequestedDates;
     }
 }

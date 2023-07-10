@@ -1,8 +1,6 @@
-package com.project.weatherforwindsurfersapp.dto;
+package com.project.weatherforwindsurfersapp.externalDto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
