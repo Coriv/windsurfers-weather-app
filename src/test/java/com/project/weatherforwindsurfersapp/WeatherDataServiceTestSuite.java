@@ -41,10 +41,18 @@ public class WeatherDataServiceTestSuite {
 
         krakowData = new WeatherData();
         krakowData.setCityName("Krakow");
+        krakowData.setLatitude("000");
+        krakowData.setLongitude("000");
+
         warsawData = new WeatherData();
         warsawData.setCityName("Warsaw");
+        warsawData.setLatitude("111");
+        warsawData.setLongitude("111");
+
         poznanData = new WeatherData();
         poznanData.setCityName("Poznan");
+        poznanData.setLatitude("222");
+        poznanData.setLongitude("222");
 
         var day1 = LocalDate.now().toString();
         var day2 = LocalDate.now().plusDays(1).toString();
