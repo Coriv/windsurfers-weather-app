@@ -42,8 +42,8 @@ public class WeatherDataService {
                 .totalScore(score)
                 .averageTemp(weatherDetails.getAverageTemp())
                 .windSpeed(weatherDetails.getWindSpeed())
-                .latitude(Double.parseDouble(weatherData.getLatitude()))
-                .longitude(Double.parseDouble(weatherData.getLongitude()))
+                .latitude(Double.valueOf(weatherData.getLatitude()))
+                .longitude(Double.valueOf(weatherData.getLongitude()))
                 .date(LocalDate.parse(weatherDetails.getValidDate()))
                 .build();
     }

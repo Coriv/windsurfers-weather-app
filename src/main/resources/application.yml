@@ -1,12 +1,15 @@
 weatherbit:
   io:
    api:
-    url: https://api.weatherbit.io/v2.0/forecast/daily
-    key: 49aeca2ceb054835be54e73f55d1b7af
+     url: https://api.weatherbit.io/v2.0/forecast/daily
+     key: 49aeca2ceb054835be54e73f55d1b7af
+   max:
+     limit:
+       dates: 7
+
 
 
 weather:
   location:
     cities:
-      Jastarnia ,Bridgetown, Fortaleza, Pissouri, La Morne
-
+      Jastarnia, Bridgetown, Fortaleza, Pissouri, La Morne
